@@ -1,0 +1,16 @@
+---
+- name: mostrar arquivo j2
+  template:
+       src: exemplo.j2
+       dest: /home/ubuntu/arquivo.txt
+  
+- name: exemplo loop com templates
+  template:
+       src: exemplo2.j2
+       dest: /home/ubuntu/arquivo2.txt
+
+- name: Copiar archivo ejecicio 1
+  ansible.builtin.copy:
+      src: /home/edi/class/Test_repo/ansible/origem.txt
+      dest: /home/ubuntu/destino.txt
+      mode: '0644'

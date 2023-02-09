@@ -1,0 +1,11 @@
+plugin: aws_ec2
+aws_profle: default
+region:
+  - eu-west-1 
+
+hostnames:
+ - ip-address
+
+groups: 
+  worker: "'worker' in tags.Name"
+  master: "'master' in tags.Name"

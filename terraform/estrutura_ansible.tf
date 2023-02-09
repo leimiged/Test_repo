@@ -95,7 +95,7 @@ resource "aws_instance" "class" {
   vpc_security_group_ids = [aws_security_group.class_sg.id]
   subnet_id              = aws_subnet.class_public_subnet.id
   user_data              = file("userdata.tpl")
-  
+
   root_block_device {
     volume_size = 10
   }
@@ -103,5 +103,4 @@ resource "aws_instance" "class" {
   tags = {
     Name = each.value.name
   }
-
 }

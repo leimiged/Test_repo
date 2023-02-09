@@ -1,0 +1,14 @@
+---
+- name: listar directorios
+    command: ls
+    register: contenido
+
+- name: comprobar ficheros
+    debug:
+      msg: "el directorio no está vacio"  
+    when: contenido.stdout != ""
+
+- name: instalar nginx
+    apt: name=nginx state="{{ state }}"
+    notify: reiniciar nginx
+

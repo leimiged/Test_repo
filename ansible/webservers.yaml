@@ -1,0 +1,71 @@
+---
+- name: primeiro playbook
+  become: true
+  hosts: all
+  gather_facts: false
+      
+  pre_tasks: 
+    - debug:
+        msg: 'Playbook de testes'
+       
+  roles:
+   - testes     
+ 
+  post_tasks: testes finalizados
+  
+- name: segundo playbook 
+  become: true
+  hosts: worker
+  gather_facts: true
+ 
+  pre_tasks: Copiando templates
+   - debug: 
+       msg: 'Copia de templates'
+  
+  roles: 
+   - templates
+   
+  post_tasks:
+    - debug:
+       msg: 'Copias realizadas'  
+ 
+- name: terceiro playbook
+  hosts: all
+  become: false
+  tags: 3_play
+  
+  pre_tasks:
+   - debug:
+      msg: 'Nginx'
+      
+  roles:
+     - nginx   
+     
+  post_tasks: 
+    - debug: 
+       msg: 'Nginx instalado y configurado'
+                
+   
+- name: playbook instalar apache web server
+  hosts: master
+  become: true
+  gather_facts: false
+ 
+  pre_tasks:
+   - debug:
+      msg: 'Apache'
+      
+  roles:
+     - apache2  
+     
+  post_tasks: 
+    - debug: 
+       msg: 'Apache2 instalado y configurado'
+   
+   
+   
+  
+
+   
+
+  

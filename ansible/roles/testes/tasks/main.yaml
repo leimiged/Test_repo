@@ -1,0 +1,20 @@
+---
+- name: comprobar conexion
+    ping: 
+     data: funcionando
+ 
+- name: echo items
+  command: echo "{{ item }}"  
+  loop:
+     - uno
+     - dos
+  
+- name: crear usuarios
+  user:
+      name: "{{ item.name }}"
+      state: present
+      group: "{{ item.groups }}"
+  loop: 
+        - { name: 'ansible', groups: 'sudo'} 
+        - { name: 'terraform', groups: 'sudo'}
+

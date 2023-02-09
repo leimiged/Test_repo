@@ -1,0 +1,5 @@
+---
+versao: "2.0"
+servidor: "Ubuntu"
+carro: ['BMW','WV','Nissan','Ford','Audi','GM']
+

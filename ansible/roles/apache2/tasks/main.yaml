@@ -1,0 +1,29 @@
+---
+- name: Instalando Apache Web
+  apt: name=apache2 update_cache=yes state=latest
+     
+- name: Push default virtual host configuration
+  ansible.builtin.copy:
+      src: /home/edi/class/Test_repo/ansible/files/awesome-app
+      dest: /etc/apache2/sites-available/awesome-app
+      mode: '0640'
+
+- name: Disable the default virtualhost
+  file: 
+      path: /etc/apache2/sites-enabled/default
+      state: absent
+  notify: reiniciar apache2
+
+- name: Disable the default ssl virtualhost
+  file: 
+       path: /etc/apache2/sites-enabled/default-ssl
+       state: absent
+  notify: reiniciar apache2
+     
+- name: Activates our virtualhost
+  file:
+      src: /etc/apache2/sites-available/awesome-app
+      dest: /etc/apache2/sites-enabled/awesome-app
+      state: link
+  notify: reiniciar apache2 
+
